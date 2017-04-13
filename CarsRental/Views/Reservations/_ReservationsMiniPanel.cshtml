@@ -1,0 +1,13 @@
+﻿@model CarsRental.ViewModels.ReservationViewModel
+
+
+
+@foreach (var reservation in Model.ReservationsList)
+{
+    <tr>
+        <td>@Html.DisplayFor(r => reservation.StartDate)</td>
+        <td>@Html.DisplayFor(r => reservation.EndDate) </td>
+        <td>@Html.DisplayFor(r => reservation.CarModel)</td>
+        <td>@Html.DisplayFor(r => reservation.TotalPrice)</td>
+    </tr>
+}

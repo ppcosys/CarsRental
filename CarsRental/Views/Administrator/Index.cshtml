@@ -1,0 +1,145 @@
+﻿@using CarsRental.Models
+@model CarsRental.ViewModels.CarsViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Panel Administratora: </h2>
+
+
+@using (Html.BeginForm("AddNewCarToDb", "Administrator", FormMethod.Post,
+                                         new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.Model, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="uploadFile" id="uploadFile" />
+                @Html.ValidationMessageFor(model => model.Car.ImageUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.CarType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.CarType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.CarType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.SeatsNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.SeatsNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.SeatsNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.DoorNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.DoorNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.DoorNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.EngineSize, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.EngineSize, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.EngineSize, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.GearboxType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.GearboxType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.GearboxType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.Aircondition, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.Aircondition, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.Aircondition, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Car.PricePerDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Car.PricePerDay, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Car.PricePerDay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<hr />
+<h4>Wybierz samochód do edycji:</h4>
+<div class="row">
+    @foreach (Car car in Model.AllCarsList)
+    {
+        <div class="row " style="margin:10px; border:1px solid;">
+            <div class="col-md-2">
+                @Html.HiddenFor(c => car.CarId)
+                <img src="@Url.Content(@car.ImageUrl ?? "~/Resources/Images/no-picture.png" )"
+                     alt="no photo" style="margin-top: 20px;" />
+            </div>
+            <div class="col-md-6">
+                @car.Model
+                <br />
+                @Html.ActionLink("Edytuj dane samochodu", "EditCarDetails", "Administrator", new { id = car.CarId }, null)
+            </div>
+
+        </div>
+    }
+</div>
+
+<hr />
+
+<h3>Nadaj role użytkownikom: </h3>
+<div class="row">
+    @foreach (Car car in Model.AllCarsList)
+    {
+        <div class="row " style="margin:10px; border:1px solid;">
+            <div class="col-md-2">
+                @Html.HiddenFor(c => car.CarId)
+                <img src="@Url.Content(@car.ImageUrl ?? "~/Resources/Images/no-picture.png" )"
+                     alt="no photo" style="margin-top: 20px;" />
+            </div>
+            <div class="col-md-6">
+                @car.Model
+                <br />
+                @Html.ActionLink("Edytuj dane samochodu", "EditCarDetails", "Administrator", new { id = car.CarId }, null)
+            </div>
+
+        </div>
+    }
+</div>
+
+
+@Html.ActionLink("Zarządzanie rolami", "Index", "Users")
+

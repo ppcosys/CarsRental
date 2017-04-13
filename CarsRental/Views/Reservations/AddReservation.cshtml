@@ -1,0 +1,57 @@
+﻿@model CarsRental.ViewModels.ReservationViewModel
+
+@{
+    ViewBag.Title = "AddReservation";
+}
+
+<h2>Samochody dostępne w wybranym terminie: </h2>
+
+@foreach (var car in Model.AvailableCarsList)
+{
+    <div class="row" style="border: solid 1px; margin: 5px;">
+        @Html.HiddenFor(c => car.CarId)
+        <div class="col-md-4" style="">
+            @Html.DisplayFor(c => car.Model)
+            <br />
+            <img src="@Url.Content(@car.ImageUrl ?? "~/Resources/Images/no-picture.png" )"
+                 alt="no photo" style="margin-top: 20px;" />
+        </div>
+        <div class="col-md-4" style="padding:20px;">
+            @Html.Label("Dane techniczne: ")
+            <br />
+            @Html.Label("Ilość miejsc: ")
+            @Html.DisplayFor(c => car.SeatsNumber)
+            <br />
+            @Html.Label("Ilość drzwi: ")
+            @Html.DisplayFor(c => car.DoorNumber)
+            <br />
+            @Html.Label("Silnik: ")
+            @Html.DisplayFor(c => car.EngineSize)
+            <br />
+            @Html.Label("Skrzynia biegów: ")
+            @Html.DisplayFor(c => car.GearboxType)
+            <br />
+            @Html.Label("Klimatyzacja: ")
+            @Html.DisplayFor(c => car.Aircondition)
+        </div>
+        @{
+            var totalPrice = Model.Reservation.ReservationTime * car.PricePerDay;
+        }
+        <div class="col-md-4" style="padding:20px;">
+            <b>Cena za dzień wypożyczenia:</b> @car.PricePerDay
+            <br />
+            Czas wypożyczenia: @Model.Reservation.ReservationTime dni
+            <br />
+            <br />
+            <b>Cena za wybrany okres wypożyczenia:</b>
+            <h3>@totalPrice</h3>
+
+            @Html.ActionLink("Wybierz Rezerwację", "AddReservationToDB",
+                    "Reservations", new { carId = car.CarId, reservationId = Model.Reservation.ReservationId },
+                    new { @class = "btn btn-primary btn-sm" })
+        </div>
+
+    </div>
+
+}
+

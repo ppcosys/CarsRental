@@ -1,0 +1,38 @@
+﻿@model CarsRental.ViewModels.ReservationViewModel
+
+@{
+    ViewBag.Title = "AddReservationToDB";
+}
+
+<h2>Twoja rezerwacja została dodana</h2>
+<br />
+
+<div class="row">
+
+    <div id="product-thumbnail" class="col-md-4">
+
+        <h3>Szczegóły rezerwacji:</h3>
+
+        @Html.Label("Data początku rezerwacji: ")
+        @Html.DisplayFor(m => m.Reservation.StartDate, "ShortDateTime")
+        <br />
+        @Html.Label("Data końca rezerwacji: ")
+        @Html.DisplayFor(m => m.Reservation.EndDate, "ShortDateTime")
+        <br />
+        @Html.Label("Ilość dni: ")
+        @Model.Reservation.ReservationTime
+        <br />
+        @Html.Label("Marka wybranego samochodu: ")
+        @Model.Reservation.CarModel
+        <br />
+        @Html.Label("Opłata: ")
+        @Model.Reservation.TotalPrice
+        <br />
+        <br />
+        
+            @Html.ActionLink("Powrót na stronę główną", "Index", "Home")
+        
+    </div>
+
+</div>
+

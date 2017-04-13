@@ -1,0 +1,45 @@
+﻿@model CarsRental.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "Index";
+    var roleStatus = System.Web.Security.Roles.Enabled;
+}
+
+<h2>Zarządzanie rolami użytkowników: </h2>
+
+@roleStatus.ToString()
+
+<hr />
+
+@Html.Label("Lista użytkowników: ")
+<br />
+@foreach (var role in Model.UsersList)
+{
+    @role.UserName
+    <br />
+}
+
+<br />
+<br />
+
+@Html.Label("Lista ról: ")
+<br />
+@foreach (var role in Model.RolesList)
+{
+    @role.Name;
+    <br />
+}
+
+<br />
+<h2>Dodaj rolę do użytkownika:</h2>
+
+@using (Html.BeginForm("AddRoleToUser", "Users", FormMethod.Post))
+{
+    @Html.Label("Podaj nazwę użytkownika: ")
+    @Html.TextBoxFor(u => u.UserName)
+    <br />
+    @Html.Label("Podaj nazwę roli użytkownika: ")
+    @Html.TextBoxFor(u => u.RoleName)
+    <br />
+    <input type="submit" value="Dodaj" class="btn btn-default" />
+}

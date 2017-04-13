@@ -1,0 +1,82 @@
+﻿
+@model IEnumerable<CarsRental.Models.Car>
+
+@{
+    ViewBag.Title = "CarFleet";
+}
+
+<h2>Lista wszystkich samochodów: </h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeatsNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DoorNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngineSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GearboxType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aircondition)
+        </th>
+        <th>
+            @Html.Label("Opłata za dzień")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @{
+                    string photoLink = item.ImageUrl.ToString();
+                }
+
+                <img src="@Url.Content(@photoLink)" alt="no photo" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SeatsNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoorNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EngineSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GearboxType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aircondition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PricePerDay)
+            </td>
+
+        </tr>
+     }
+
+</table>
+
