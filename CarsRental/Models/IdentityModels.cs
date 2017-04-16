@@ -26,7 +26,7 @@ namespace CarsRental.Models
 
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("CarsRental", throwIfV1Schema: false)
         {
         }
 
