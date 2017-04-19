@@ -4,7 +4,7 @@ Wypożyczalnia samochodów
 Założenia projektu: firma wypożyczająca samochody dysponuje własną ograniczoną flotą samochodów. 
 Należy stworzyć taki system rezerwacji który prezentował by dostępne samochody w wybranym przez wypożyczającego okresie czasu 
 wraz z wyliczoną ceną za dany okres wypożyczenia. 
-
+live demo: http://carsrental.dostrony.pl/
  Użyte technologie:
 
     ASP MVC 4.5.2
